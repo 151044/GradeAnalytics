@@ -5,6 +5,8 @@ import com.s151044.analytics.api.Course;
 import com.s151044.analytics.api.Grade;
 
 import com.s151044.analytics.api.Semester;
+import com.s151044.analytics.parsers.DefaultParser;
+import com.s151044.analytics.parsers.FileParser;
 import com.s151044.analytics.ui.ListTableModel.ListTableColumn;
 
 import javax.swing.*;
@@ -48,20 +50,18 @@ public class CourseDisplayPanel extends CourseDisplay {
                 JFileChooser chooser = new JFileChooser(Path.of("").toFile().getAbsolutePath());
                 int result = chooser.showOpenDialog(null);
                 if (result == JFileChooser.APPROVE_OPTION) {
-                    File f = chooser.getSelectedFile();
+                    Path p = chooser.getSelectedFile().toPath();
                     try {
-                        List<String> courses = Files.readAllLines(f.toPath());
-                        Main.getFrame().fireCourseLoaded(courses.stream().map(s -> {
-                            String[] arr = s.split(";");
-                            String[] semArr = arr[6].split(" ");
-                            String[] semDuration = semArr[0].split("-");
-                            return new Course(arr[0], arr[1], arr[2], Integer.parseInt(arr[4]),
-                                    Boolean.parseBoolean(arr[5]), new Grade(arr[3]),
-                                    new Semester(Integer.parseInt(semDuration[0]), Integer.parseInt(semDuration[1]),
-                                            semArr[1]));
-                        }).toList());
-                        pathField.setText(f.getName());
-                    } catch (IOException e) {
+                        FileParser parser = FileParser.detectType(p);
+                        List<Course> courses = parser.parseCourse(p);
+                        if (!(parser instanceof DefaultParser)) {
+                            MajorCourseFrame frame = new MajorCourseFrame(courses);
+                            frame.await();
+                            courses = frame.getModified();
+                        }
+                        Main.getFrame().fireCourseLoaded(courses);
+                        pathField.setText(p.toFile().getName());
+                    } catch (IOException | InterruptedException e) {
                         throw new RuntimeException(e);
                     }
                 }
