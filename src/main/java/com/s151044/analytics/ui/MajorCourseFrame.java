@@ -3,6 +3,7 @@ package com.s151044.analytics.ui;
 import com.s151044.analytics.api.Course;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,10 +22,12 @@ public class MajorCourseFrame extends JFrame {
         ret = new ArrayList<>(courses);
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        add(new JLabel("Please select all major courses, then press Submit."));
+        JLabel label = new JLabel("Please select all major courses, then press Submit.");
+        label.setFont(label.getFont().deriveFont(Font.BOLD));
+        add(label);
 
         for (Course c : courses) {
-            JCheckBox box = new JCheckBox(c.dept() + " " + c.code());
+            JCheckBox box = new JCheckBox(c.dept() + " " + c.code() + ", " + c.semester());
             box.addItemListener(ie -> {
                 ret.remove(c);
                 if (ie.getStateChange() == ItemEvent.SELECTED) {
