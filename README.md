@@ -29,7 +29,11 @@ Copy all the entries from [SIS's Course History](https://sisprod.psft.ust.hk/psc
 
 ## Manual Formatting
 The program can also take information from a formatted file, in the format below per row:
+
+```
 Department;Course Code;Course Title;Grade;Credits;Is Major Course or Not (true or false); Semester
+```
+Effectively, this is a CSV file separated by semicolons instead of commas.
 
 A sample line would be as follows:
 ```
