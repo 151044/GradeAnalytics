@@ -52,7 +52,7 @@ public class CourseDisplayPanel extends CourseDisplay {
                     try {
                         List<String> courses = Files.readAllLines(f.toPath());
                         Main.getFrame().fireCourseLoaded(courses.stream().map(s -> {
-                            String[] arr = s.split(",");
+                            String[] arr = s.split(";");
                             String[] semArr = arr[6].split(" ");
                             String[] semDuration = semArr[0].split("-");
                             return new Course(arr[0], arr[1], arr[2], Integer.parseInt(arr[4]),
