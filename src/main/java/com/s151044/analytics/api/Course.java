@@ -10,11 +10,11 @@ public record Course(String dept, String code, String title, int credits, boolea
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Course course)) return false;
-        return Objects.equals(dept, course.dept) && Objects.equals(code, course.code);
+        return Objects.equals(dept, course.dept) && Objects.equals(code, course.code) && Objects.equals(semester, course.semester);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(dept, code);
+        return Objects.hash(dept, code, semester);
     }
 }

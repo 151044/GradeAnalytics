@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 import java.util.stream.DoubleStream;
 
 public class GradeAverageChartPanel extends CourseDisplay {
-    private static final DecimalFormat FORMATTER = new DecimalFormat("#.00");
     public GradeAverageChartPanel() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     }
@@ -60,8 +59,10 @@ public class GradeAverageChartPanel extends CourseDisplay {
                         mtgaData.add(Map.entry(ordered.get(ordered.size() - 1).offset(entry.getKey()), mtga));
                     }
                 }
-                chart.addSeries("MTGA", mtgaData.stream().map(Map.Entry::getKey).toList(),
-                        mtgaData.stream().map(Map.Entry::getValue).toList());
+                if (!mtgaData.isEmpty()) {
+                    chart.addSeries("MTGA", mtgaData.stream().map(Map.Entry::getKey).toList(),
+                            mtgaData.stream().map(Map.Entry::getValue).toList());
+                }
             } else {
                 chart.addSeries(legends.get(i), offsets, data.stream().map(entry -> entry.getValue().get(finalI)).toList());
             }
