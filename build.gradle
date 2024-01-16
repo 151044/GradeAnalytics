@@ -20,3 +20,15 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+tasks.register('dist', Jar) {
+    manifest {
+        attributes 'Main-Class': "com.s151044.analytics.Main"
+    }
+    dependsOn configurations.runtimeClasspath
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    with jar
+}
