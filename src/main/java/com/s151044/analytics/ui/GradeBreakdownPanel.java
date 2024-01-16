@@ -18,7 +18,7 @@ public class GradeBreakdownPanel extends CourseDisplay {
     private JTable gradeTable = new JTable();
     private JScrollPane rangePane;
     private JScrollPane gradePane;
-    private GridBagConstraints cons = new GridBagConstraints();
+    private final GridBagConstraints cons = new GridBagConstraints();
     public GradeBreakdownPanel() {
         setLayout(new GridBagLayout());
         initializeConstraint();

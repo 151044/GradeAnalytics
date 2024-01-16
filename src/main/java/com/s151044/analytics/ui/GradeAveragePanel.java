@@ -7,12 +7,10 @@ import com.s151044.analytics.ui.ListTableModel.ListTableColumn;
 import javax.swing.*;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.DoubleStream;
-import java.util.stream.Stream;
 
 public class GradeAveragePanel extends CourseDisplay {
     public GradeAveragePanel() {

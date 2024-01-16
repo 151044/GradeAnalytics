@@ -3,7 +3,6 @@ package com.s151044.analytics.ui;
 import com.s151044.analytics.Main;
 import com.s151044.analytics.api.Course;
 import com.s151044.analytics.api.Grade;
-
 import com.s151044.analytics.api.Semester;
 import com.s151044.analytics.parsers.DefaultParser;
 import com.s151044.analytics.parsers.FileParser;
@@ -12,16 +11,14 @@ import com.s151044.analytics.ui.ListTableModel.ListTableColumn;
 import javax.swing.*;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
 public class CourseDisplayPanel extends CourseDisplay {
     private JTable table;
     private JScrollPane pane;
-    private GridBagConstraints cons = new GridBagConstraints();
+    private final GridBagConstraints cons = new GridBagConstraints();
     public CourseDisplayPanel() {
         cons.gridwidth = GridBagConstraints.REMAINDER;
         cons.gridheight = 1;

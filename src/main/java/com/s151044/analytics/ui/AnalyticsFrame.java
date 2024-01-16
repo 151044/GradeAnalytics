@@ -38,14 +38,12 @@ public class AnalyticsFrame extends JFrame {
         setVisible(true);
     }
     public void fireCourseLoaded(List<Course> courses) {
-        panels.forEach(p -> {
-            SwingUtilities.invokeLater(() -> {
-                p.set(courses);
-                invalidate();
-                revalidate();
-                repaint();
-                pack();
-            });
-        });
+        panels.forEach(p -> SwingUtilities.invokeLater(() -> {
+            p.set(courses);
+            invalidate();
+            revalidate();
+            repaint();
+            pack();
+        }));
     }
 }
