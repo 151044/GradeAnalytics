@@ -3,6 +3,14 @@ package com.s151044.analytics.api;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Class representing a grade.
+ * <p>
+ * A "grade string" in this context is a non-empty String which contains either any of these <b>non-graded</b>
+ * grades: XF, PA, DI, PP, T, P, or a letter in {A, B, C, D, F} followed by a plus sign (+) or a minus sign.
+ *
+ * @param grade The grade string
+ */
 public record Grade(String grade) implements Comparable<Grade> {
     public Grade {
         if (grade.isEmpty()) {
@@ -17,6 +25,11 @@ public record Grade(String grade) implements Comparable<Grade> {
             "A", 4
     );
     private static final List<String> NON_GRADED = List.of("XF", "PA", "DI", "PP", "T", "P");
+
+    /**
+     * Converts this grade to GPA.
+     * @return The numerical GPA value of this grade.
+     */
     public double toGpa() {
         if (NON_GRADED.contains(grade)) {
             return 0;
@@ -32,10 +45,18 @@ public record Grade(String grade) implements Comparable<Grade> {
         }
     }
 
+    /**
+     * Checks if the grade is counted towards GPA or not.
+     * @return True if the grade counts towards GPA, false otherwise
+     */
     public boolean isGraded() {
         return !NON_GRADED.contains(grade);
     }
 
+    /**
+     * Gets the letter of this grade without any modifications.
+     * @return A string containing a single letter, representing the grade range of this grade
+     */
     public String range() {
         if (!isGraded()) {
             return grade;
