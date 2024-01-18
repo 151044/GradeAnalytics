@@ -9,6 +9,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
+/**
+ * The strategy to parse the default input format, specified in the Course class.
+ */
 public class DefaultParser implements FileParser {
     @Override
     public List<Course> parseCourse(Path path) throws IOException {

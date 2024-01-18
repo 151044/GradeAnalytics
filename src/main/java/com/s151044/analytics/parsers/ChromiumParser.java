@@ -10,6 +10,9 @@ import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * The strategy for parsing SIS data copied from Chromium-based browser.
+ */
 public class ChromiumParser implements FileParser {
     @Override
     public List<Course> parseCourse(Path path) throws IOException {

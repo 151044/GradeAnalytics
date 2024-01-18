@@ -9,7 +9,13 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * The strategy for parsing SIS data copied from Firefox.
+ */
 public class FirefoxParser implements FileParser {
+    /**
+     * The number of lines used for each course.
+     */
     private static final int COURSE_STRING_LENGTH = 6;
     @Override
     public List<Course> parseCourse(Path path) throws IOException {
