@@ -11,7 +11,7 @@ import java.nio.file.Path;
 
 public class Main {
     private static AnalyticsFrame frame;
-    public static void main(String[] args) throws UnsupportedLookAndFeelException, IOException {
+    public static void main(String[] args) throws UnsupportedLookAndFeelException {
         UIManager.setLookAndFeel(new FlatDarkLaf());
         frame = new AnalyticsFrame();
     }

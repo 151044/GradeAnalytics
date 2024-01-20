@@ -2,6 +2,12 @@ package com.s151044.analytics.api;
 
 import java.util.List;
 
+/**
+ * Class representing a semester.
+ * @param first The year of the Fall semester that academic year
+ * @param second The year of the Spring semester that academic year
+ * @param semester The name of the semester; should be one of Fall, Winter, Spring, Summer
+ */
 public record Semester(int first, int second, String semester) implements Comparable<Semester> {
     private static final List<String> SEMESTERS = List.of("Fall", "Winter", "Spring", "Summer");
     public Semester {
@@ -28,6 +34,12 @@ public record Semester(int first, int second, String semester) implements Compar
             return -Integer.compare(SEMESTERS.indexOf(semester), SEMESTERS.indexOf(otherSemester.semester));
         }
     }
+
+    /**
+     * Calculates the absolute difference (in number of semesters) between two semesters.
+     * @param other The other semester to compare to
+     * @return The number of semesters between the two semesters
+     */
     public int offset(Semester other) {
         if (equals(other)) {
             return 0;
