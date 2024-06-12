@@ -1,6 +1,8 @@
 package com.s151044.analytics.parsers;
 
 import com.s151044.analytics.api.Course;
+import com.s151044.analytics.api.Grade;
+import com.s151044.analytics.api.Semester;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -19,6 +21,23 @@ public interface FileParser {
      * @throws IOException If the file cannot be read
      */
     List<Course> parseCourse(Path path) throws IOException;
+
+    /**
+     * Maps a list of strings to a course object.
+     * Used by parsers for Chromium/Firefox browsers input as a mapping function.
+     * @param str A list of strings as input, storing the information of the course.
+     * @return A course object containing the information from the input list of strings.
+     */
+    static Course strMapToCourse(List<String> str) {
+        String[] deptCode = str.get(0).split(" ");
+        String[] semester = str.get(2).split(" ");
+        return new Course(deptCode[0], deptCode[1], str.get(1),
+                (int) Double.parseDouble(str.get(4)), false,
+                new Grade(str.get(3)), new Semester(
+                        Integer.parseInt(semester[0].split("-")[0].substring(2)),
+                        Integer.parseInt(semester[0].split("-")[1]),
+                semester[1]));
+    }
 
     /**
      * Groups lines in a file into lists of a given size.
